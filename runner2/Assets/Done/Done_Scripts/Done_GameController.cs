@@ -17,6 +17,7 @@ public class Done_GameController : MonoBehaviour
 	private bool gameOver;
 	private bool restart;
 	private int score;
+	private int[] numSign;
 	
 	void Start ()
 	{
@@ -27,6 +28,7 @@ public class Done_GameController : MonoBehaviour
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
+		numSign = new int[]{1,-1};
 	}
 	
 	void Update ()
@@ -48,7 +50,15 @@ public class Done_GameController : MonoBehaviour
 			for (int i = 0; i < hazardCount; i++)
 			{
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
-				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				Vector3 spawnPosition;
+				if(hazard.tag=="bomb"){
+					//generate wall at right or left of screen
+					 spawnPosition = new Vector3 ((numSign[Random.Range(0,numSign.Length)] * (spawnValues.x ))
+					                                                  , spawnValues.y, spawnValues.z);	
+				}
+				else {
+				 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				}
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (hazard, spawnPosition, spawnRotation);
 				yield return new WaitForSeconds (spawnWait);

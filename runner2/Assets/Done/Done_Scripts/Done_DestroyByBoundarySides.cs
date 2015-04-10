@@ -8,22 +8,25 @@ public enum enum_Side{
 
 public class Done_DestroyByBoundarySides : MonoBehaviour
 {
-	public int type; //0-Left  1-Right
 	public enum_Side side;
+	private Done_GameController gameController;
+
+	void Start ()
+	{
+		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
+		if (gameControllerObject != null)
+		{
+			gameController = gameControllerObject.GetComponent <Done_GameController>();
+		}
+		if (gameController == null)
+		{
+			Debug.Log ("Cannot find 'GameController' script");
+		}
+	}
 
 	void OnTriggerEnter (Collider other) 
 	{
-		//The correct animal hit the right side
-		if (side == enum_Side.side_right && type == 1) {	
-			Destroy (other.gameObject);
-			//TODO: increase score
-			
-		} else if (side == enum_Side.side_left && type == 0) {		
-			Destroy (other.gameObject);
-		} else {
-			//TODO: Decrease lives
-			Destroy (other.gameObject);
-		}
+
       }
 	
 }
