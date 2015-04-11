@@ -13,11 +13,15 @@ public class Done_GameController : MonoBehaviour
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
+	public GUIText pigCounter;
+	public GUIText  sheepCounter;
 	
 	private bool gameOver;
 	private bool restart;
 	private int score;
 	private int[] numSign;
+	private int pigCount=0;
+	private int sheepCount=0;
 	
 	void Start ()
 	{
@@ -82,12 +86,26 @@ public class Done_GameController : MonoBehaviour
 	
 	void UpdateScore ()
 	{
-		scoreText.text = "Score: " + score;
+		scoreText.text =  ""+score;
+		pigCounter.text =  ""+pigCount;
+		sheepCounter.text =  ""+sheepCount;
 	}
 	
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over!";
 		gameOver = true;
+	}
+
+	public void AddPigCount ()
+	{
+		pigCount += 1;
+		UpdateScore ();
+	}
+
+	public void AddSheepCount ()
+	{
+		sheepCount += 1;
+		UpdateScore ();
 	}
 }

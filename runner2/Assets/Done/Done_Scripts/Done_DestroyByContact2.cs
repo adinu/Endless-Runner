@@ -48,6 +48,7 @@ public class Done_DestroyByContact2 : MonoBehaviour
 						
 			if(side == enum_Side.side_right) {		
 			   gameController.AddScore(scoreValue);
+				gameController.AddPigCount();
 			   Destroy (this);
 			} else if(side == enum_Side.side_left) {		
 				gameController.AddScore(-scoreValue);
@@ -62,6 +63,7 @@ public class Done_DestroyByContact2 : MonoBehaviour
 			
 				if(side == enum_Side.side_left) { 		
 			gameController.AddScore(scoreValue);
+				gameController.AddSheepCount();
 				Destroy (this);
 
 			} else if(side == enum_Side.side_right) {		
