@@ -23,9 +23,10 @@ public class Done_DestroyByContact2 : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter (Collider other)
+	void OnTriggerEnter2D (Collider2D other)
 	{
-//		if (other.tag == "Boundary" || other.tag == "Enemy")
+		Debug.Log ("other.name" + other.name);
+		//		if (other.tag == "Boundary" || other.tag == "Enemy")
 //		{
 //			return;
 //		}
@@ -41,6 +42,8 @@ public class Done_DestroyByContact2 : MonoBehaviour
 
 			//gameController.GameOver();
 			healthCount--;
+			Debug.Log("boundry hit");
+			Destroy (gameObject);
 		}
 
 		if (other.tag == "Boundary_R") 
