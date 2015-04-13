@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TapToMove : MonoBehaviour {
+public class Swipe : MonoBehaviour {
 
 
 	void OnMouseDown (){
@@ -40,4 +40,6 @@ public class TapToMove : MonoBehaviour {
 			                                  Time.deltaTime * speed);
 		}
 	}
+
+
 } 
