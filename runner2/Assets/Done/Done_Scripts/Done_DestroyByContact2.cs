@@ -26,10 +26,7 @@ public class Done_DestroyByContact2 : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		Debug.Log ("other.name" + other.name);
-		//		if (other.tag == "Boundary" || other.tag == "Enemy")
-//		{
-//			return;
-//		}
+
 
 		if (explosion != null)
 		{
@@ -46,46 +43,50 @@ public class Done_DestroyByContact2 : MonoBehaviour
 			Destroy (gameObject);
 		}
 
-		if (other.tag == "Boundary_R") 
-		{
+//		if (other.tag == "Boundary_R") 
+//		{
+//						
+//			if(side == enum_Side.side_right) {		
+//			   gameController.AddScore(scoreValue);
+//				gameController.AddPigCount();
+//			   Destroy (this);
+//			} else if(side == enum_Side.side_left) {		
+//				gameController.AddScore(-scoreValue);
+//				healthCount--;
+//				Destroy (this);
+//			}
+//
+//		}
+		if (other.tag == "gate") {
 						
-			if(side == enum_Side.side_right) {		
-			   gameController.AddScore(scoreValue);
-				gameController.AddPigCount();
-			   Destroy (this);
-			} else if(side == enum_Side.side_left) {		
-				gameController.AddScore(-scoreValue);
-				healthCount--;
-				Destroy (this);
-			}
+			Debug.Log("gate hit");
+				gameController.AddScore (scoreValue);
+				gameController.AddSheepCount ();
+			Destroy (gameObject);
 
 		}
-		
-		if (other.tag == "Boundary_L") 
-		{
-			
-				if(side == enum_Side.side_left) { 		
-			gameController.AddScore(scoreValue);
-				gameController.AddSheepCount();
-				Destroy (this);
-
-			} else if(side == enum_Side.side_right) {		
-				gameController.AddScore(-scoreValue);
-				healthCount--;
-				Destroy (this);
-			}
-		}
+//		
+//		if (other.tag == "Boundary_L") 
+//		{
+//			
+//				if(side == enum_Side.side_left) { 		
+//			gameController.AddScore(scoreValue);
+//				gameController.AddSheepCount();
+//				Destroy (this);
+//
+//			} else if(side == enum_Side.side_right) {		
+//				gameController.AddScore(-scoreValue);
+//				healthCount--;
+//				Destroy (this);
+//			}
+//		}
 
 		if (other.tag == "bomb") 
 		{
 			gameController.AddScore(-scoreValue);
 			healthCount--;
-			Destroy (this);
+			Destroy (gameObject);
 		}
-			
-
-		//		Destroy (other.gameObject);
-
 
 	}
 }
