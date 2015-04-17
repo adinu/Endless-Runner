@@ -91,7 +91,7 @@ namespace Lean
 		public float SwipeThreshold = 50.0f;
 		
 		// This allows you to set how many seconds a finger must be held down for it to be regarded as being held down
-		public float HeldThreshold = 1.0f;
+		public float HeldThreshold = 0.2f;//1.0f;
 		
 		// This allows you to set the default DPI you want the input scaling to be based on
 		public int ReferenceDpi = 200;

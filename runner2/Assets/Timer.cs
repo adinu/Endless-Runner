@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour {
 			gameController.GameOver ();
 		} else {
 			timeRemaining -= timeToDecrease;
-			Debug.Log ("timeRemaining " + timeRemaining);
+			//Debug.Log ("timeRemaining " + timeRemaining);
 		}
 	}
 

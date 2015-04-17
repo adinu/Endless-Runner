@@ -21,31 +21,24 @@ public class Simple2DSwiper : MonoBehaviour
 
     public void OnFingerSwipe(Lean.LeanFinger finger)
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         //Create a Ray on the tapped / clicked position
         Ray ray = Camera.main.ScreenPointToRay(finger.StartScreenPosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
         //Check if the ray hits any collider
-        if (hit.collider.gameObject == gameObject)
-        {
+		if (hit.collider.gameObject != null) {
 
-            Debug.Log("Hi");
-            // Get the rigidbody component
-            var rigidbody = GetComponent<Rigidbody2D>();
+			if (hit.collider.gameObject == gameObject) {
 
-            // Add force to the rigidbody based on the swipe force
-<<<<<<< HEAD
-               rigidbody.AddForce(finger.ScaledSwipeDelta * ForceMultiplier);
-			Debug.Log(finger.ScaledSwipeDelta);
-=======
-            rigidbody.AddForce(finger.ScaledSwipeDelta * ForceMultiplier);
->>>>>>> origin/master
-        }
+				Debug.Log ("Hi");
+				// Get the rigidbody component
+				var rigidbody = GetComponent<Rigidbody2D> ();
 
+				// Add force to the rigidbody based on the swipe force
+				rigidbody.AddForce (finger.ScaledSwipeDelta * ForceMultiplier);
+				Debug.Log (finger.ScaledSwipeDelta);
+			}
+		}
 
 
         /*print("YOOOOOO");
