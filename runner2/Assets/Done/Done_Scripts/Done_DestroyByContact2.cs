@@ -75,6 +75,10 @@ public class Done_DestroyByContact2 : MonoBehaviour
 
 		if (other.tag == "bomb") 
 		{
+			if (explosion != null)
+			{
+				Instantiate(explosion, transform.position, transform.rotation);
+			}
 			gameController.AddScore(-scoreValue);
 			Destroy(other.gameObject);
 			Destroy (gameObject);

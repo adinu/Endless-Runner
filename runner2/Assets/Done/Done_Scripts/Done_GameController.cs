@@ -14,16 +14,20 @@ public class Done_GameController : MonoBehaviour
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
-	public Text pigCounter;
-	public Text  sheepCounter;
+
+	public int creature_R_Vol;
+	public int creature_L_Vol;
+	public int creature_Bonus_1;
+	public int creature_Bonus_2;
+	public int creature_Bonus_3;
+	public int creature_Surprise;
+	public int creature_Bomb;
 	
 	private bool gameOver;
 	private bool restart;
 	private int score;
 	private int[] numSign;
-	private int pigCount=0;
-	private int sheepCount=0;
-	
+
 	void Start ()
 	{
 		gameOver = false;
@@ -50,24 +54,58 @@ public class Done_GameController : MonoBehaviour
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
+		int rand;
+		GameObject hazard;
+		Vector3 spawnPosition;
 		while (true)
 		{
-			for (int i = 0; i < hazardCount; i++)
+//			for (int i = 0; i < hazardCount; i++)
+			while(!gameOver)
 			{
-				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
-				Vector3 spawnPosition;
-				if(hazard.tag=="bomb"){
-					//generate wall at right or left of screen
-					 spawnPosition = new Vector3 ((numSign[Random.Range(0,numSign.Length)] * (spawnValues.x ))
-					                                                  , spawnValues.y, spawnValues.z);	
-				}
-				else {
-				 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-				}
+				rand = Random.Range (0,100);
+				hazard = hazards [0];
+				//-R creature
+				if(rand < creature_R_Vol) //-R creature
+					hazard = hazards [0];
+
+				//-L creature
+				if(rand >= creature_R_Vol && rand <(creature_L_Vol+creature_R_Vol))
+				   hazard = hazards [1];
+				//Bonus 1
+				if(rand >= creature_L_Vol+creature_R_Vol && rand <(creature_L_Vol+creature_R_Vol+creature_Bonus_1))
+				   hazard = hazards [2];
+				//Bonus 2
+				if(rand >= creature_L_Vol+creature_R_Vol+creature_Bonus_1 && rand <(creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2))
+					hazard = hazards [3];
+				//Bonus 3
+				if(rand >= creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2 &&
+				   rand <(creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2+creature_Bonus_3))
+					hazard = hazards [4];
+				//Surprise
+				if(rand >= creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2+creature_Bonus_3 &&
+				   rand <(creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2+creature_Bonus_3+creature_Surprise))
+					hazard = hazards [5];
+				//Bomb
+				if(rand >= creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2+creature_Bonus_3+creature_Surprise &&
+				   rand <=(creature_L_Vol+creature_R_Vol+creature_Bonus_1+creature_Bonus_2+creature_Bonus_3+creature_Surprise+creature_Bomb))
+					hazard = hazards [6];
+
+			//	GameObject hazard = hazards [Random.Range (0, hazards.Length)];
+
+//				if(hazard.tag=="bomb"){
+//					//generate wall at right or left of screen
+//					 spawnPosition = new Vector3 ((numSign[Random.Range(0,numSign.Length)] * (spawnValues.x ))
+//					                                                  , spawnValues.y, spawnValues.z);	
+//				}
+
+				spawnPosition = new Vector3
+					(Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+			
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (hazard, spawnPosition, spawnRotation);
 				yield return new WaitForSeconds (spawnWait);
 			}
+
 			yield return new WaitForSeconds (waveWait);
 			
 			if (gameOver)
@@ -81,6 +119,9 @@ public class Done_GameController : MonoBehaviour
 	
 	public void AddScore (int newScoreValue)
 	{
+		if ((score += newScoreValue) < 0)//cannot be negative
+			return;
+
 		score += newScoreValue;
 		UpdateScore ();
 	}
@@ -88,8 +129,6 @@ public class Done_GameController : MonoBehaviour
 	void UpdateScore ()
 	{
 		scoreText.text =  ""+score;
-		pigCounter.text =  ""+pigCount;
-		sheepCounter.text =  ""+sheepCount;
 	}
 	
 	public void GameOver ()
@@ -98,15 +137,4 @@ public class Done_GameController : MonoBehaviour
 		gameOver = true;
 	}
 
-	public void AddPigCount ()
-	{
-		pigCount += 1;
-		UpdateScore ();
-	}
-
-	public void AddSheepCount ()
-	{
-		sheepCount += 1;
-		UpdateScore ();
-	}
 }

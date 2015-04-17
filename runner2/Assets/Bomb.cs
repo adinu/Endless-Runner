@@ -30,4 +30,13 @@ public class Bomb : MonoBehaviour {
 //		Destroy (other.gameObject);	
 //		Destroy (gameObject);
 		}
+
+
+	void OnMouseDown(){
+		if (explosion != null)
+		{
+			Instantiate(explosion, transform.position, transform.rotation);
+		}
+		Destroy (gameObject);
+	}
 }
