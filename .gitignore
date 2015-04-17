@@ -22,3 +22,5 @@ sysinfo.txt
 *.ide
 runner2/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll.meta
 *.meta
+runner2/UnityVS.runner2.sln.ide/edb.chk
+*.chk

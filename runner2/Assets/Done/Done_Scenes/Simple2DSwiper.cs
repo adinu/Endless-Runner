@@ -5,7 +5,7 @@
 public class Simple2DSwiper : MonoBehaviour
 {
     public float ForceMultiplier;
-
+    public float SwipeSpeed;
     protected virtual void OnEnable()
     {
 
@@ -30,37 +30,32 @@ public class Simple2DSwiper : MonoBehaviour
 
 			if (hit.collider.gameObject == gameObject) {
 
-				Debug.Log ("Hi");
+				Debug.Log ("Swiping");
 				// Get the rigidbody component
-				var rigidbody = GetComponent<Rigidbody2D> ();
-
-				// Add force to the rigidbody based on the swipe force
-				rigidbody.AddForce (finger.ScaledSwipeDelta * ForceMultiplier);
-				Debug.Log (finger.ScaledSwipeDelta);
-			}
-		}
-
-
-        /*print("YOOOOOO");
-        // Raycast information
-        var ray = finger.GetRay();
-        Vector2 hit = default(RaycastHit2D);
-        
-        // Was this finger pressed down on a collider?
-        if (Physics2D.Raycast(ray, out hit) == true)
-        {
-            print("HI");
-            print(hit);
-            // Was that collider this one?
-            if (hit.collider.gameObject == gameObject)
-            {
-                print(hit);
-                // Get the rigidbody component
-           //     var rigidbody = GetComponent<Rigidbody2D>();
+				Rigidbody2D rigidbody = GetComponent<Rigidbody2D> ();
 
                 // Add force to the rigidbody based on the swipe force
-             //   rigidbody.AddForce(finger.ScaledSwipeDelta * ForceMultiplier);
-            }
-        }*/
+                // rigidbody.AddForce (finger.ScaledSwipeDelta * ForceMultiplier);
+
+
+                // Add force to the rigidbody based on the FIXED SPEED 
+                // WORK ONLY FOR LEFT OR RIGHT ! ! !  TOP AND BOT WONT DO SHIT!
+                // Store the swipe delta in a temp variable
+                var swipe = finger.SwipeDelta;
+              
+                if (swipe.x < -Mathf.Abs(swipe.y))
+                {
+                    rigidbody.AddForce(new Vector2(transform.position.x - SwipeSpeed, transform.position.y));
+
+                } else if (swipe.x > Mathf.Abs(swipe.y))
+                {
+                    rigidbody.AddForce(new Vector2(transform.position.x + SwipeSpeed, transform.position.y));
+                } else
+                {
+                    // do nothing.
+                }
+                Debug.Log (finger.ScaledSwipeDelta);
+			}
+		}
     }
 }
