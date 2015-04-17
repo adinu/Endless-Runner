@@ -45,11 +45,11 @@ public class Simple2DSwiper : MonoBehaviour
               
                 if (swipe.x < -Mathf.Abs(swipe.y))
                 {
-                    rigidbody.AddForce(new Vector2(transform.position.x - SwipeSpeed, transform.position.y));
+                    rigidbody.AddForce(new Vector2(transform.position.x - SwipeSpeed, transform.position.y), ForceMode2D.Force);
 
                 } else if (swipe.x > Mathf.Abs(swipe.y))
                 {
-                    rigidbody.AddForce(new Vector2(transform.position.x + SwipeSpeed, transform.position.y));
+                    rigidbody.AddForce(new Vector2(transform.position.x + SwipeSpeed, transform.position.y), ForceMode2D.Force);
                 } else
                 {
                     // do nothing.
