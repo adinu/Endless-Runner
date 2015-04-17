@@ -3,7 +3,7 @@ using System.Collections;
 
 public class gateController : MonoBehaviour {
 
-	public enum_Side side;
+	//public enum_Side side;
 	private Done_GameController gameController;
 	private GameObject gameControllerObject;
 	
@@ -22,15 +22,15 @@ public class gateController : MonoBehaviour {
 
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "creature_right") {
-			gameController = gameControllerObject.GetComponent <Done_GameController> ();
-			gameController.AddScore (10);
-		}
-
-		if (coll.gameObject.tag == "creature_left") {
-			gameController = gameControllerObject.GetComponent <Done_GameController> ();
-			gameController.AddScore (10);
-		}
+//		if (coll.gameObject.tag == "creature_right") {
+//			gameController = gameControllerObject.GetComponent <Done_GameController> ();
+//			gameController.AddScore (10);
+//		}
+//
+//		if (coll.gameObject.tag == "creature_left") {
+//			gameController = gameControllerObject.GetComponent <Done_GameController> ();
+//			gameController.AddScore (10);
+//		}
 		
 	}
 }

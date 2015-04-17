@@ -4,7 +4,7 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class Simple2DSwiper : MonoBehaviour
 {
-    public float ForceMultiplier = 5.5f;
+    public float ForceMultiplier;
 
     protected virtual void OnEnable()
     {
@@ -21,9 +21,6 @@ public class Simple2DSwiper : MonoBehaviour
 
     public void OnFingerSwipe(Lean.LeanFinger finger)
     {
-
-        
-
         //Create a Ray on the tapped / clicked position
         Ray ray = Camera.main.ScreenPointToRay(finger.StartScreenPosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
@@ -38,6 +35,7 @@ public class Simple2DSwiper : MonoBehaviour
 
             // Add force to the rigidbody based on the swipe force
                rigidbody.AddForce(finger.ScaledSwipeDelta * ForceMultiplier);
+			Debug.Log(finger.ScaledSwipeDelta);
         }
 
 
