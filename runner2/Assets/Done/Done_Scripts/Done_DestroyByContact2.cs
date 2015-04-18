@@ -52,6 +52,7 @@ public class Done_DestroyByContact2 : MonoBehaviour
 				if (side == enum_Side.side_right) { 
 					timerGameObject.increaseTimeRemaining(timeBonus);
 					gameController.AddScore (scoreValue);
+
 					Destroy (gameObject);
 				}
 			}

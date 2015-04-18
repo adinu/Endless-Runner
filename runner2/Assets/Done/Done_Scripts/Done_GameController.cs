@@ -4,14 +4,17 @@ using UnityEngine.UI;
 
 public class Done_GameController : MonoBehaviour
 {
+	public GameObject gameOverMenu;
 	public GameObject[] hazards;
 	public Vector3 spawnValues;
-	public int hazardCount;
+//	public int hazardCount;
 	public float spawnWait;
 	public float startWait;
-	public float waveWait;
+//	public float waveWait;
 	
 	public Text scoreText;
+	public Text scoreGameOverText;
+	public Text highText;
 	public Text restartText;
 	public Text gameOverText;
 
@@ -25,7 +28,7 @@ public class Done_GameController : MonoBehaviour
 	
 	private bool gameOver;
 	private bool restart;
-	private int score;
+	private int score=0;
 	private int[] numSign;
 
 	void Start ()
@@ -106,7 +109,7 @@ public class Done_GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 
-			yield return new WaitForSeconds (waveWait);
+			//yield return new WaitForSeconds (waveWait);
 			
 			if (gameOver)
 			{
@@ -135,7 +138,32 @@ public class Done_GameController : MonoBehaviour
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over!";
+		scoreGameOverText.text =  "Score: "+score;
+
+		string highScoreKey = "HighScore";
+		int highScore = PlayerPrefs.GetInt (highScoreKey, 0);
+		if (score > highScore) {//update score
+			PlayerPrefs.SetInt (highScoreKey, score);
+			PlayerPrefs.Save();
+		}
+
+		highText.text =  "High Score: " + highScore;
 		gameOver = true;
+		StartCoroutine (wait ());
+
+		Time.timeScale = 0;
+	
+		if(gameOverMenu != null)
+			gameOverMenu.SetActive (true);
+	}
+
+	IEnumerator wait(){
+		yield return new WaitForSeconds(10.0f);
+	}
+
+	public void reload(){
+		Time.timeScale = 1;
+		Application.LoadLevel (1);
 	}
 
 }
