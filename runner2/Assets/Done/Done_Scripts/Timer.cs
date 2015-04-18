@@ -45,6 +45,7 @@ public class Timer : MonoBehaviour {
 
 	public void increaseTimeRemaining(float timeToAdd)
 	{
+		if (timeRemaining <= maxTime)
 		timeRemaining += timeToAdd;
 	}
 
