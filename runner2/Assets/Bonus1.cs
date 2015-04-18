@@ -5,6 +5,9 @@ public class Bonus : MonoBehaviour {
 	public int scoreValue;
 	public GameObject explosion;
 	private Done_GameController gameController;
+	public SpriteRenderer sr;
+	public Sprite s1;
+	public Sprite s2;
 	
 	// Use this for initialization
 	void Start () {
