@@ -36,6 +36,7 @@ public class Bomb : MonoBehaviour {
 		{
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
+		gameController.GameOver ();
 		Destroy (gameObject);
 	}
 }
