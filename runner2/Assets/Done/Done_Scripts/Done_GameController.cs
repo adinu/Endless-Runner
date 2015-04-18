@@ -119,7 +119,8 @@ public class Done_GameController : MonoBehaviour
 	
 	public void AddScore (int newScoreValue)
 	{
-		if ((score += newScoreValue) < 0)//cannot be negative
+		int tempScore = score;
+		if ((tempScore += newScoreValue) < 0)//cannot be negative
 			return;
 
 		score += newScoreValue;
